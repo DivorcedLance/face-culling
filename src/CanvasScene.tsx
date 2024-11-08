@@ -53,7 +53,7 @@ const GeometryWithNormals = ({
       const viewVector = new THREE.Vector3().subVectors(v0, camera.position).normalize();
       const dotProduct = faceNormal.dot(viewVector);
       const isFrontFace = dotProduct > 0;
-      const visible = (frontCulling && isFrontFace) || (backCulling && !isFrontFace);
+      const visible = (frontCulling && !isFrontFace) || (backCulling && isFrontFace);
 
       facesInfo.push({
         id: i,
@@ -94,7 +94,7 @@ const GeometryWithNormals = ({
       const viewVector = new THREE.Vector3().subVectors(camera.position, face.vertices[0]).normalize();
       const dotProduct = face.normal.dot(viewVector);
       const isFrontFace = dotProduct > 0;
-      const visible = (frontCulling && isFrontFace) || (backCulling && !isFrontFace);
+      const visible = (frontCulling && !isFrontFace) || (backCulling && isFrontFace);
 
       if (visible || drawFaces) {
         const finalColor = visible ? face.color : new THREE.Color(0, 0, 0);
@@ -171,7 +171,7 @@ const CanvasScene = ({
           drawFaces={drawFaces}
           backCulling={backCulling}
           frontCulling={frontCulling}
-          opacity={backCulling ? 0.5 : 1}
+          opacity={backCulling ? 1 : 0.5}
         />
         <OrbitControls />
       </Canvas>
