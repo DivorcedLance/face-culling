@@ -43,7 +43,7 @@ const GeometryWithNormals = ({
 
       // Calcular la normal de la cara
       const edge1 = new THREE.Vector3().subVectors(v1, v0);
-      const edge2 = new THREE.Vector3().subVectors(v1, v2);
+      const edge2 = new THREE.Vector3().subVectors(v2, v1);
       const faceNormal = new THREE.Vector3().crossVectors(edge1, edge2).normalize();
 
       // Seleccionar el color para la cara
@@ -52,7 +52,7 @@ const GeometryWithNormals = ({
       // Calcular el vector de vista inicial y el producto punto
       const viewVector = new THREE.Vector3().subVectors(v0, camera.position).normalize();
       const dotProduct = faceNormal.dot(viewVector);
-      const isFrontFace = dotProduct > 0;
+      const isFrontFace = dotProduct < 0;
       const visible = (frontCulling && !isFrontFace) || (backCulling && isFrontFace);
 
       facesInfo.push({
@@ -93,7 +93,7 @@ const GeometryWithNormals = ({
     const visibleFaces = faceData.map((face) => {
       const viewVector = new THREE.Vector3().subVectors(camera.position, face.vertices[0]).normalize();
       const dotProduct = face.normal.dot(viewVector);
-      const isFrontFace = dotProduct > 0;
+      const isFrontFace = dotProduct < 0;
       const visible = (frontCulling && !isFrontFace) || (backCulling && isFrontFace);
 
       if (visible || drawFaces) {

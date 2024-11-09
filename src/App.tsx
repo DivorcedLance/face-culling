@@ -5,15 +5,15 @@ import { FaceInfoCard } from './components/FaceInfoCard';
 
 const App = () => {
   const [facesInfo, setFacesInfo] = useState<FaceInfo[]>([]);
-  const [backCulling, setBackCulling] = useState(false);
-  const [frontCulling, setFrontCulling] = useState(true);
+  const [backCulling, setBackCulling] = useState(true);
+  const [frontCulling, setFrontCulling] = useState(false);
   const [drawFaces, setDrawFaces] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     // media query to change main div to flex colum
     <div className='flex h-screen flex-col md:flex-row'>
-      <div className='flex w-full h-1/2 md:w-3/4 md:h-full bg-slate-800'>
+      <div className='flex w-full h-1/2 md:w-3/4 md:h-full bg-white'>
         <CanvasScene
           onFaceInfo={setFacesInfo}
           showBothSides={true}
@@ -67,7 +67,7 @@ const App = () => {
         )}
       </div>
 
-      <div className='flex flex-col text-xl bg-gray-800 overflow-y-scroll no-scrollbar md:items-end p-4 w-full md:w-1/4'>
+      <div className='flex flex-col text-xl bg-white overflow-y-scroll no-scrollbar md:items-end p-4 w-full md:w-1/4'>
         <div className='grid grid-cols-2 md:w-full md:flex md:flex-col gap-3'>
           {facesInfo.map((face, index) => (
             <FaceInfoCard key={index} face={face} />
